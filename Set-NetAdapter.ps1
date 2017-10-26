@@ -13,7 +13,8 @@ function Set-NetAdapter {
                 $ReturnValue = $adapter.enable() | Select-Object -ExpandProperty ReturnValue
                 if ($ReturnValue -eq 0) {
                     Write-Host 'Disable network adapter successful' -ForegroundColor Green
-                } else {
+                }
+                else {
                     Write-Host 'Something went wrong, check network adapter manualy'
                 }
             }
@@ -22,11 +23,21 @@ function Set-NetAdapter {
                 $ReturnValue = $adapter.disable() | Select-Object -ExpandProperty ReturnValue
                 if ($ReturnValue -eq 0) {
                     Write-Host 'Disable network adapter successful' -ForegroundColor Green
-                } else {
+                }
+                else {
                     Write-Host 'Something went wrong, check network adapter manualy'
                 }
             }
-            
+            '3' {
+                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}                
+                $ReturnValue = $adapter.EnableDHCP() | Select-Object -ExpandProperty ReturnValue
+                if ($ReturnValue -eq 0) {
+                    Write-Host 'Enable DHCP on adapter successful' -ForegroundColor Green
+                }
+                else {
+                    Write-Host 'Something went wrong, check DHCP on network adapter manualy'
+                }
+            }
             
             
             Default { Write-Host 'Choose one more time!' -ForegroundColor Yellow}
