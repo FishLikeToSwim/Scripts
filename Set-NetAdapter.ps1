@@ -50,9 +50,10 @@ function Set-NetAdapter {
                 }
             }
             '4' {
-
-
-
+                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}
+                $adapter.EnableStatic('10.160.164.50', '255.255.255.0')
+                $adapter.SetGateways("10.160.164.1")
+                $adapter.SetDNSServerSearchOrder("10.14.12.10")
 
 
 
