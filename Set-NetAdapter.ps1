@@ -15,7 +15,7 @@ function Set-NetAdapter {
                     Write-Host 'Disable network adapter successful' -ForegroundColor Green
                 }
                 else {
-                    Write-Host 'Something went wrong, check network adapter manualy'
+                    Write-Host 'Something went wrong, check network adapter manualy' -ForegroundColor red
                 }
             }
             '2' {
@@ -25,17 +25,22 @@ function Set-NetAdapter {
                     Write-Host 'Disable network adapter successful' -ForegroundColor Green
                 }
                 else {
-                    Write-Host 'Something went wrong, check network adapter manualy'
+                    Write-Host 'Something went wrong, check network adapter manualy' -ForegroundColor red
                 }
             }
             '3' {
                 $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}                
-                $ReturnValue = $adapter.EnableDHCP() | Select-Object -ExpandProperty ReturnValue
-                if ($ReturnValue -eq 0) {
-                    Write-Host 'Enable DHCP on adapter successful' -ForegroundColor Green
+                if ($adapter.DHCPenabled -eq $true) {
+                    Write-Host 'DHCP is on' -ForegroundColor Green
                 }
                 else {
-                    Write-Host 'Something went wrong, check DHCP on network adapter manualy'
+                    $ReturnValue = $adapter.EnableDHCP() | Select-Object -ExpandProperty ReturnValue
+                    if ($ReturnValue -eq 0) {
+                        Write-Host 'Enable DHCP successful' -ForegroundColor Green
+                    }
+                    else {
+                        Write-Host 'Something went wrong, check DHCP on network adapter manualy' -ForegroundColor red
+                    }
                 }
             }
             
