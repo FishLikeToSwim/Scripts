@@ -4,7 +4,13 @@ function Set-NetAdapter {
         [string]$choice
     )
     BEGIN {
-        $choice = Read-Host 'Choose what you want!'
+        Write-Host "`n"
+        Write-Host 'Key 1 enable LAN NIC '
+        Write-Host 'Key 2 disable LAN NIC'
+        Write-Host 'Key 3 enable DHCP on LAN NIC'
+        Write-Host 'Key 4 set static IP adress on LAN NIC'
+        Write-Host "`n"
+        $choice = Read-Host 'Choose what you want to do!'
     }
     PROCESS {
         switch ($choice) {
@@ -12,7 +18,7 @@ function Set-NetAdapter {
                 $adapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.Name -like "*Gigabit*"}
                 $ReturnValue = $adapter.enable() | Select-Object -ExpandProperty ReturnValue
                 if ($ReturnValue -eq 0) {
-                    Write-Host 'Disable network adapter successful' -ForegroundColor Green
+                    Write-Host 'Enable network adapter successful' -ForegroundColor Green
                 }
                 else {
                     Write-Host 'Something went wrong, check network adapter manualy' -ForegroundColor red
@@ -43,7 +49,14 @@ function Set-NetAdapter {
                     }
                 }
             }
-            
+            '4' {
+
+
+
+
+
+
+            }
             
             Default { Write-Host 'Choose one more time!' -ForegroundColor Yellow}
         }
