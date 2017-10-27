@@ -48,15 +48,19 @@ function Set-NetAdapter {
                         Write-Host 'Something went wrong, check DHCP on network adapter manualy' -ForegroundColor red
                     }
                 }
+                $ReturnDNS = $adapter.SetDNSServerSearchOrder() | Select-Object -ExpandProperty ReturnValue
+                if ($ReturnDNS -eq 0) {
+                    Write-Host 'Enable DNS successful' -ForegroundColor Green
+                }
+                else {
+                    Write-Host 'Something went wrong, check DNS on network adapter manualy' -ForegroundColor red
+                }
             }
             '4' {
                 $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}
                 $adapter.EnableStatic('10.160.164.50', '255.255.255.0')
                 $adapter.SetGateways("10.160.164.1")
                 $adapter.SetDNSServerSearchOrder("10.14.12.10")
-
-
-
             }
             
             Default { Write-Host 'Choose one more time!' -ForegroundColor Yellow}
