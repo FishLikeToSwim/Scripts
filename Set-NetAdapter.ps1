@@ -1,3 +1,22 @@
+<#
+.SYNOPSIS
+    Configure network adapter
+.DESCRIPTION
+    Script configure LAN adapter
+.EXAMPLE
+    Key 1 enable LAN NIC
+    Key 2 disable LAN NIC
+    Key 3 enable DHCP on LAN NIC
+    Key 4 set static IP adress on LAN NIC
+
+
+    Choose what you want to do!: 1
+.NOTES
+    Author: Wojtek | 1o.2o17
+#>
+
+
+
 function Set-NetAdapter {
     [Cmdletbinding()]
     param (
