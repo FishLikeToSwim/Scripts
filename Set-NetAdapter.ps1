@@ -8,8 +8,6 @@
     Key 2 disable LAN NIC
     Key 3 enable DHCP on LAN NIC
     Key 4 set static IP adress on LAN NIC
-
-
     Choose what you want to do!: 1
 .NOTES
     Author: Wojtek | 1o.2o17
@@ -20,7 +18,11 @@
 function Set-NetAdapter {
     [Cmdletbinding()]
     param (
-        [string]$choice
+        [string]$choice,
+        [string]$IP = '',
+        [string]$Mask = '',
+        [string]$Gate = '',
+        [string]$DNS = ''
     )
     BEGIN {
         Write-Host "`n"
@@ -69,7 +71,7 @@ function Set-NetAdapter {
                 }
                 $ReturnDNS = $adapter.SetDNSServerSearchOrder() | Select-Object -ExpandProperty ReturnValue
                 if ($ReturnDNS -eq 0) {
-                    Write-Host 'Enable DNS successful' -ForegroundColor Green
+                    Write-Host 'DNS is on ' -ForegroundColor Green
                 }
                 else {
                     Write-Host 'Something went wrong, check DNS on network adapter manualy' -ForegroundColor red
@@ -77,9 +79,9 @@ function Set-NetAdapter {
             }
             '4' {
                 $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}
-                $adapter.EnableStatic('10.160.164.50', '255.255.255.0')
-                $adapter.SetGateways("10.160.164.1")
-                $adapter.SetDNSServerSearchOrder("10.14.12.10")
+                $adapter.EnableStatic($IP, $Mask)
+                $adapter.SetGateways($Gate)
+                $adapter.SetDNSServerSearchOrder($DNS)
             }
             
             Default { Write-Host 'Choose one more time!' -ForegroundColor Yellow}
@@ -89,11 +91,3 @@ function Set-NetAdapter {
 
     }
 }
-
-
-
-# switch 
-# 1. enable adapter
-# 2. disable adapter 
-# 3. Set static IP
-# 4. change adapter setting at DHCP 
