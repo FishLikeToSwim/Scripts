@@ -22,9 +22,11 @@ function Set-NetAdapter {
         [string]$IP = '',
         [string]$Mask = '',
         [string]$Gate = '',
-        [string]$DNS = ''
+        [string]$DNS = '',
+        [string]$Device
     )
     BEGIN {
+        $Device = Read-Host 'Choose network device: Adapter or Gigabit'
         Write-Host "`n"
         Write-Host 'Key 1 enable LAN NIC '
         Write-Host 'Key 2 disable LAN NIC'
@@ -36,7 +38,7 @@ function Set-NetAdapter {
     PROCESS {
         switch ($choice) {
             '1' { 
-                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.Name -like "*Gigabit*"}
+                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.Name -like "*$Device*"}
                 $ReturnValue = $adapter.enable() | Select-Object -ExpandProperty ReturnValue
                 if ($ReturnValue -eq 0) {
                     Write-Host 'Enable network adapter successful' -ForegroundColor Green
@@ -46,7 +48,7 @@ function Set-NetAdapter {
                 }
             }
             '2' {
-                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.Name -like "*Gigabit*"}
+                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.Name -like "*$Device*"}
                 $ReturnValue = $adapter.disable() | Select-Object -ExpandProperty ReturnValue
                 if ($ReturnValue -eq 0) {
                     Write-Host 'Disable network adapter successful' -ForegroundColor Green
@@ -56,7 +58,7 @@ function Set-NetAdapter {
                 }
             }
             '3' {
-                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}                
+                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*$Device*"}                
                 if ($adapter.DHCPenabled -eq $true) {
                     Write-Host 'DHCP is on' -ForegroundColor Green
                 }
@@ -78,7 +80,7 @@ function Set-NetAdapter {
                 }
             }
             '4' {
-                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*Gigabit*"}
+                $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*$Device*"}
                 $adapter.EnableStatic($IP, $Mask)
                 $adapter.SetGateways($Gate)
                 $adapter.SetDNSServerSearchOrder($DNS)
