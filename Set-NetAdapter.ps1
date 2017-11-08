@@ -4,6 +4,7 @@
 .DESCRIPTION
     Script configure LAN adapter
 .EXAMPLE
+    Choose network device: Adapter or Gigabit: Gigabit
     Key 1 enable LAN NIC
     Key 2 disable LAN NIC
     Key 3 enable DHCP on LAN NIC
