@@ -72,8 +72,8 @@ function Set-NetAdapter {
                         Write-Host 'Something went wrong, check DHCP on network adapter manualy' -ForegroundColor red
                     }
                 }
-                $ReturnDNS = $adapter.SetDNSServerSearchOrder() | Select-Object -ExpandProperty ReturnValue
-                if ($ReturnDNS -eq 0) {
+                $DNSAvailable = $adapter.SetDNSServerSearchOrder() | Select-Object -ExpandProperty ReturnValue
+                if ($DNSAvailable -eq 0) {
                     Write-Host 'DNS is on ' -ForegroundColor Green
                 }
                 else {
@@ -82,10 +82,25 @@ function Set-NetAdapter {
             }
             '4' {
                 $adapter = Get-WmiObject -ClassName Win32_NetworkAdapterConfiguration | Where-Object {$_.Description -like "*$Device*"}
-                $adapter.EnableStatic($IP, $Mask)
-                $adapter.SetGateways($Gate)
-                $adapter.SetDNSServerSearchOrder($DNS)
-            }
+                $ReturnIP = $adapter.EnableStatic($IP, $Mask) | Select-Object -ExpandProperty ReturnValue
+                if ($ReturnIP -eq 0) {
+                    Write-Host 'Set IP successful ' -ForegroundColor Green
+                } else {
+                    Write-Host 'Something went wrong with IP set ' -ForegroundColor Green
+                }
+                $ReturnGate = $adapter.SetGateways($Gate) | Select-Object -ExpandProperty ReturnValue
+                if ($ReturnGate -eq 0) {
+                    Write-Host 'Set Gate successful ' -ForegroundColor Green
+                } else {
+                    Write-Host 'Something went wrong with Gate set ' -ForegroundColor Green
+                }
+                $ReturnDNS = $adapter.SetDNSServerSearchOrder($DNS) | Select-Object -ExpandProperty ReturnValue
+                if ($ReturnDNS -eq 0) {
+                    Write-Host 'Set DNS successful ' -ForegroundColor Green
+                } else {
+                    Write-Host 'Something went wrong with DNS set ' -ForegroundColor Green
+                }
+            }   
             
             Default { Write-Host 'Choose one more time!' -ForegroundColor Yellow}
         }
