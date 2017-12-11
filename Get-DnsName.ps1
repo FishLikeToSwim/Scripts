@@ -17,12 +17,18 @@
 
 function Get-DnsName {
     param (
-
+        [Parameter(Mandatory = $false)]
+        [string]$path,
+        [Parameter(Mandatory = $false)]
+        [regex]$regex
     )
     begin {
-
+        [string]$path = 'C:\log.txt'
+        [regex]$regex = '\b(?:\d{1,3}\.){3}\d{1,3}\b'
     }
     process {
+        $ip = Select-String -Path $path -Pattern $regex -AllMatches | ForEach-Object { $_.Matches } | ForEach-Object { $_.Value }
+        $dns = Select-String -Path $path -Pattern $regex -AllMatches | ForEach-Object { $_.Matches } | ForEach-Object { $_.Value } | ForEach-Object {[System.Net.Dns]::GetHostEntry($_)} 
 
     }
     end {
