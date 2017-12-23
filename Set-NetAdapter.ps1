@@ -3,6 +3,8 @@
     Configure network adapter
 .DESCRIPTION
     Script configure LAN adapter
+    Remember! You must check the name of Ethernet or WiFi card and replace names at:
+    $Device = Read-Host 'Choose network device: Adapter or Gigabit'
 .EXAMPLE
     Choose network device: Adapter or Gigabit: Gigabit
     Key 1 enable LAN NIC
@@ -22,7 +24,6 @@ function Set-NetAdapter {
 
     )
     BEGIN {
-        [string]$choice
         [string]$IP = ''
         [string]$Mask = ''
         [string]$Gate = ''
@@ -34,7 +35,7 @@ function Set-NetAdapter {
         Write-Host 'Key 3 enable DHCP on LAN NIC'
         Write-Host 'Key 4 set static IP adress on LAN NIC'
         Write-Host "`n"
-        $choice = Read-Host 'Choose what you want to do!'
+        [string]$choice = Read-Host 'Choose what you want to do!'
     }
     PROCESS {
         switch ($choice) {
