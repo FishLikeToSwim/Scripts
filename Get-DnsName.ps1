@@ -1,17 +1,17 @@
 <#
 .SYNOPSIS
-    Short description
+    Resolve ip adresses in file
 .DESCRIPTION
-    Long description
+    This script help you to resolve ip adresses and replace them in file with their dns names
 .EXAMPLE
-    PS C:\> <example usage>
-    Explanation of what the example does
+PS C:\Users\Wojtek\Documents\WindowsPowerShell\Scripts> . .\Get-DnsName.ps1
+PS C:\Users\Wojtek\Documents\WindowsPowerShell\Scripts> Get-DnsName
 .INPUTS
-    Inputs (if any)
+    $path - path to file
 .OUTPUTS
     Output (if any)
 .NOTES
-    General notes
+    Author: Wojtek 12|2017
 #>
 
 
