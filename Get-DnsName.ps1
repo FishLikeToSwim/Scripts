@@ -27,9 +27,13 @@ function Get-DnsName {
         [regex]$regex = '\b(?:\d{1,3}\.){3}\d{1,3}\b'
     }
     process {
-        $ip = Select-String -Path $path -Pattern $regex -AllMatches | ForEach-Object { $_.Matches } | ForEach-Object { $_.Value }
-        $dns = Select-String -Path $path -Pattern $regex -AllMatches | ForEach-Object { $_.Matches } | ForEach-Object { $_.Value } | ForEach-Object {[System.Net.Dns]::GetHostEntry($_)} 
+        
+        $occurences = Select-String -Path $path -Pattern $regex -AllMatches | ForEach-Object { $_.Matches } | ForEach-Object { $_.Value } | ForEach-Object {[System.Net.Dns]::GetHostEntry($_)} 
 
+        foreach ($o in $occurences) {
+            bierzesz plik, szukasz matchu i podmieniasz
+
+        }
     }
     end {
         
