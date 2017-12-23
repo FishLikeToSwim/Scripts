@@ -19,14 +19,14 @@
 function Set-NetAdapter {
     [Cmdletbinding()]
     param (
-        [string]$choice,
-        [string]$IP = '',
-        [string]$Mask = '',
-        [string]$Gate = '',
-        [string]$DNS = '',
-        [string]$Device
+
     )
     BEGIN {
+        [string]$choice
+        [string]$IP = ''
+        [string]$Mask = ''
+        [string]$Gate = ''
+        [string]$DNS = ''
         $Device = Read-Host 'Choose network device: Adapter or Gigabit'
         Write-Host "`n"
         Write-Host 'Key 1 enable LAN NIC '
