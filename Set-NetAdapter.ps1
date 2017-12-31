@@ -3,22 +3,57 @@
     Configure network adapter
 .DESCRIPTION
     Script configure LAN adapter
-    Remember! You must check the name of Ethernet or WiFi card and replace names at:
-    $Device = Read-Host 'Choose network device: Adapter or Gigabit'
+    Copy and Paste name of device which you want to use
+    Fill variables before you use script 
+        [string]$IP = ''
+        [string]$Mask = ''
+        [string]$Gate = ''
+        [string]$DNS = ''
 .EXAMPLE
-    Choose network device: Adapter or Gigabit: Gigabit
+    PS C:\Users\Wojtek\Documents\WindowsPowerShell\Scripts> .\Set-NetAdapter.ps1
+    ------------------------------------------------------------------------
+    WAN Miniport (SSTP)
+    WAN Miniport (IKEv2)
+    WAN Miniport (L2TP)
+    WAN Miniport (PPTP)
+    WAN Miniport (PPPOE)
+    WAN Miniport (IPv6)
+    WAN Miniport (Network Monitor)
+    Intel(R) 82579LM Gigabit Network Connection
+    WAN Miniport (IP)
+    Karta Microsoft 6to4
+    RAS Async Adapter
+    Intel(R) Centrino(R) Advanced-N 6205
+    Karta Microsoft ISATAP #2
+    VMware Virtual Ethernet Adapter for VMnet1
+    Karta Microsoft ISATAP
+    VMware Virtual Ethernet Adapter for VMnet8
+    Karta Microsoft ISATAP #3
+    Urządzenie Bluetooth (sieć osobista)
+    Karta Microsoft ISATAP #4
+    Teredo Tunneling Pseudo-Interface
+    Karta Microsoft ISATAP #5
+    ------------------------------------------------------------------------
+    Copy and Paste device which you want to use: Intel(R) 82579LM Gigabit Network Connection
+    ------------------------------------------------------------------------
+
+
     Key 1 enable LAN NIC
     Key 2 disable LAN NIC
     Key 3 enable DHCP on LAN NIC
     Key 4 set static IP adress on LAN NIC
+
+
     Choose what you want to do!: 1
+    Enable network adapter successful
 .NOTES
-    Author: Wojtek | 1o.2o17
+    Author: Wojtek 
+    v1 | 1o.2o17
+    v2 | 12.2o17
 #>
 
 
 
-function Set-NetAdapter {
     [Cmdletbinding()]
     param (
 
@@ -28,7 +63,11 @@ function Set-NetAdapter {
         [string]$Mask = ''
         [string]$Gate = ''
         [string]$DNS = ''
-        $Device = Read-Host 'Choose network device: Adapter or Gigabit'
+        Write-Host '------------------------------------------------------------------------'
+        Get-WmiObject -ClassName Win32_NetworkAdapter | Select-Object -ExpandProperty Name
+        Write-Host '------------------------------------------------------------------------'
+        $Device = Read-Host 'Copy and Paste device which you want to use'
+        Write-Host '------------------------------------------------------------------------'
         Write-Host "`n"
         Write-Host 'Key 1 enable LAN NIC '
         Write-Host 'Key 2 disable LAN NIC'
@@ -109,4 +148,3 @@ function Set-NetAdapter {
     END {
 
     }
-}
