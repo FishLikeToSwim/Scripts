@@ -20,3 +20,4 @@ steps:
     inputs:
       testResultsFormat: 'NUnit'
       testResultsFiles: 'Test-Pester.xml'
+    condition: succeededOrFailed()
