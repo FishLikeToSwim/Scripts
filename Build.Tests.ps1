@@ -1,4 +1,5 @@
-
+Install-Module -Name Pester -RequiredVersion 4.10.1 -Repository PSGallery
+Import-Module -Name Pester -RequiredVersion 4.10.1
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 <#
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
