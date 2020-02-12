@@ -1,4 +1,4 @@
-Install-Module -Name Pester -RequiredVersion 4.10.1 -Repository PSGallery
+Install-Module -Name Pester -RequiredVersion 4.10.1 -Repository PSGallery -Scope CurrentUser -Force
 Import-Module -Name Pester -RequiredVersion 4.10.1
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 <#
