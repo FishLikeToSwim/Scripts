@@ -11,11 +11,12 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-  - task: PowerShell@2
-    displayName: 'Run Pester'
+  - task: Pester@0
     inputs:
-      targetType: 'inline'
-      script: 'Invoke-Pester -Script .\Build.Tests.ps1 -OutputFile Test-Pester.XML -OutputFormat NUnitXML'
+      scriptFolder: 'Build.Tests.ps1'
+      resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+      usePSCore: False
+      run32Bit: False
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'NUnit'
