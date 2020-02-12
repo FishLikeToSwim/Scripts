@@ -13,7 +13,7 @@ pool:
 steps:
   - task: Pester@0
     inputs:
-      scriptFolder: 'Build.Tests.ps1'
+      scriptFolder: '.\Build.Tests.ps1'
       resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
       usePSCore: False
       run32Bit: False
