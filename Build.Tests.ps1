@@ -13,21 +13,21 @@ foreach ($file in $files) {
   Describe "Function $file is Testing" {
     Context 'Help Tests' {
       It 'Function has SYNOPSIS' {
-        $test | Should -FileContentMatch '.SYNOPSIS'
+        $test | Should FileContentMatch '.SYNOPSIS'
       }
   
       It 'Function has DESCRIPTION' {
-        $test | Should -FileContentMatch '.DESCRIPTION'
+        $test | Should FileContentMatch '.DESCRIPTION'
       }
   
       It 'Function has EXAMPLE' {
-        $test | Should -FileContentMatch '.EXAMPLE'
+        $test | Should FileContentMatch '.EXAMPLE'
       }
     }
     Context 'Function Behavior Tests' {
       It 'Function is Advanced Function' {
-        $test | Should -FileContentMatch 'cmdletbinding'
-        $test | Should -FileContentMatch 'param'
+        $test | Should FileContentMatch 'cmdletbinding'
+        $test | Should FileContentMatch 'param'
       }
     }
   }
