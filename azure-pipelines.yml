@@ -11,7 +11,7 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
-  - task: PowerShell@
+  - task: PowerShell@2
     displayName: 'Run Pester'
     inputs:
       targetType: 'inline'
