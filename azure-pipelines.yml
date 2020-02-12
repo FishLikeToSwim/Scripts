@@ -15,4 +15,4 @@ steps:
     displayName: 'Run Pester'
     inputs:
       targetType: 'inline'
-      script: '.\Build.Tests.ps1'
+      script: 'Invoke-Pester -Script .\Build.Tests.ps1 -OutputFile Test-Pester.XML -OutputFormat NUnitXML'
