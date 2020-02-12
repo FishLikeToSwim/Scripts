@@ -11,8 +11,8 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
-- task: Pester@8
-  inputs:
-    scriptFolder: '$(System.DefaultWorkingDirectory)*'
-    resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
-    run32Bit: False
+  - task: PowerShell@
+    displayName: 'Run Pester'
+    inputs:
+      targetType: 'inline'
+      script: '.\Build.Tests.ps1'
