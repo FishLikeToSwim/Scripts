@@ -13,6 +13,6 @@ pool:
 steps:
 - task: Pester@8
   inputs:
-    scriptFolder: '$(System.DefaultWorkingDirectory)\Build.Tests.ps1'
+    scriptFolder: '$(System.DefaultWorkingDirectory)*'
     resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
     run32Bit: False
