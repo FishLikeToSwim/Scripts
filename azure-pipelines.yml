@@ -16,3 +16,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: 'Invoke-Pester -Script .\Build.Tests.ps1 -OutputFile Test-Pester.XML -OutputFormat NUnitXML'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'NUnit'
+      testResultsFiles: 'Test-Pester.xml'
