@@ -31,5 +31,5 @@ steps:
       targetBranch: 'master'
       repoUrl: 'https://github.com/wpietrzakpl/Scripts'
       remoteName: 'origin'
-
+      pat: "https://$(accessToken)@github.com/wpietrzakpl/Scripts.git"
 
