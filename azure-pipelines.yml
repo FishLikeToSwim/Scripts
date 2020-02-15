@@ -31,3 +31,4 @@ steps:
       targetBranch: 'master'
       repoUrl: 'https://github.com/wpietrzakpl/Scripts'
       remoteName: 'origin'
+      pat: '$(accessToken)'
