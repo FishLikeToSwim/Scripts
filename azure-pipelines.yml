@@ -22,3 +22,9 @@ steps:
       testResultsFormat: 'NUnit'
       testResultsFiles: '$(System.DefaultWorkingDirectory)\Test-Pester.xml'
     condition: succeededOrFailed()
+  - task: gitMerge@0
+    inputs:
+      mergeType: 'merge'
+      targetBranch: 'master'
+      repoUrl: 'https://github.com/wpietrzakpl/Scripts'
+      remoteName: 'origin'
