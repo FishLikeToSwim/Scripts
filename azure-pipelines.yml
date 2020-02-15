@@ -30,9 +30,4 @@ steps:
       mergeType: 'merge'
       targetBranch: 'master'
       repoUrl: 'https://github.com/wpietrzakpl/Scripts'
-<<<<<<< HEAD
       remoteName: 'origin'
-=======
-      remoteName: 'origin'
-      pat: '$(accessToken)'
->>>>>>> master
