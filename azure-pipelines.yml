@@ -31,6 +31,6 @@ steps:
       targetBranch: 'master'
       repoUrl: 'https://github.com/wpietrzakpl/Scripts'
       remoteName: 'origin'
-      pat: '$env:MY_MAPPED_TOKEN'
+      pat: 'MY_MAPPED_TOKEN'
     env:
       MY_MAPPED_TOKEN: $(accessToken)
