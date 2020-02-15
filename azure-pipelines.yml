@@ -10,6 +10,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+variables:
+- group: Var
+
 steps:
   - task: Pester@0
     inputs:
@@ -28,3 +31,4 @@ steps:
       targetBranch: 'master'
       repoUrl: 'https://github.com/wpietrzakpl/Scripts'
       remoteName: 'origin'
+      pat: '$(accessToken)'
