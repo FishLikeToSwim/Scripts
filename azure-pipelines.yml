@@ -30,7 +30,7 @@ steps:
       mergeType: 'merge'
       targetBranch: 'master'
       repoUrl: 'https://github.com/wpietrzakpl/Scripts'
-      remoteName: 'origin master'
+      remoteName: 'origin'
       pat: 'MY_MAPPED_TOKEN'
     env:
       MY_MAPPED_TOKEN: $(accessToken)
