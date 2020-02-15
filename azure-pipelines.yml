@@ -5,6 +5,7 @@
 # https://aka.ms/yaml
 
 trigger:
+<<<<<<< HEAD
 - dev
 
 pool:
@@ -34,3 +35,34 @@ steps:
       pat: 'MY_MAPPED_TOKEN'
     env:
       MY_MAPPED_TOKEN: $(accessToken)
+=======
+  - dev
+  
+  pool:
+    vmImage: 'windows-latest'
+  
+  variables:
+  - group: Var
+  
+  steps:
+    - task: Pester@0
+      inputs:
+        scriptFolder: '.\Build.Tests.ps1'
+        resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+        usePSCore: False
+        run32Bit: False
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'NUnit'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)\Test-Pester.xml'
+      condition: succeededOrFailed()
+    - task: gitMerge@0
+      inputs:
+        mergeType: 'merge'
+        targetBranch: 'master'
+        repoUrl: 'https://github.com/wpietrzakpl/Scripts'
+        remoteName: 'origin'
+        pat: '$(MY_MAPPED_TOKEN)'
+      env:
+        MY_MAPPED_TOKEN: $(accessToken)
+>>>>>>> master
