@@ -5,8 +5,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 . "$here\$sut"
 #>
-
-$files = Get-ChildItem | Where-Object {(($_.Name -ne "azure-pipelines.yml") -and ($_.Name -ne "Build.Tests.ps1"))}
+$date = (Get-Date).GetDateTimeFormats()[0]
+$files = Get-ChildItem | Where-Object {(($_.Name -ne "azure-pipelines.yml") -and ($_.Name -ne "Build.Tests.ps1"))} | Where-Object {$_.LastWriteTime -match $date}
 
 foreach ($file in $files) {
   $test = "$here/$file"
