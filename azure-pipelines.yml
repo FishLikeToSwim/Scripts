@@ -25,12 +25,9 @@ trigger:
         testResultsFormat: 'NUnit'
         testResultsFiles: '$(System.DefaultWorkingDirectory)\Test-Pester.xml'
       condition: succeededOrFailed()
-    - task: gitMerge@0
+    - task: PowerShell@2
       inputs:
-        mergeType: 'merge'
-        targetBranch: 'master'
-        repoUrl: 'https://github.com/wpietrzakpl/Scripts'
-        remoteName: 'origin'
-        pat: '$(MY_MAPPED_TOKEN)'
-      env:
-        MY_MAPPED_TOKEN: $(accessToken)
+      targetType: 'inline'
+      script: |
+        Write-Host "Hello World"
+        git status
