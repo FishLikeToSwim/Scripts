@@ -33,9 +33,9 @@ steps:
         git fetch
         git config --global user.email wojciechpietrzak@yahoo.customize
         git branch
-        git checkout --track origin\dev
+        git checkout --track dev
         git branch
-        git checkout --track origin\master
+        git checkout --track master
         git checkout master
-         
+
 
