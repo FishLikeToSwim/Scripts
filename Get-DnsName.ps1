@@ -11,7 +11,7 @@ PS C:\Users\Wojtek\Documents\WindowsPowerShell\Scripts> Get-DnsName
 .OUTPUTS
     Output (if any)
 .NOTES
-    Author: Wojtek 12|2017
+    Author: Wojtek 02|2020
 #>
 
 
