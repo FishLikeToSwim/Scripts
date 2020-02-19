@@ -30,5 +30,12 @@ steps:
       targetType: 'inline'
       script: |
         Write-Host "Hello World"
-        git status
+        git fetch
+        git config --global user.email wojciechpietrzak@yahoo.customize
+        git branch
+        git checkout --track origin\dev
+        git branch
+        git checkout --track origin\master
+        git checkout master
+         
 
