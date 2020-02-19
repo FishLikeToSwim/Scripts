@@ -7,27 +7,27 @@
 trigger:
   - dev
   
-  pool:
+pool:
     vmImage: 'windows-latest'
   
-  variables:
+variables:
   - group: Var
   
-  steps:
-    - task: Pester@0
-      inputs:
+steps:
+  - task: Pester@0
+    inputs:
         scriptFolder: '.\Build.Tests.ps1'
         resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
         usePSCore: False
         run32Bit: False
-    - task: PublishTestResults@2
-      inputs:
+  - task: PublishTestResults@2
+    inputs:
         testResultsFormat: 'NUnit'
         testResultsFiles: '$(System.DefaultWorkingDirectory)\Test-Pester.xml'
-      condition: succeededOrFailed()
-    - task: PowerShell@2
-      inputs:
-      targetType: 'inline'
-      script: |
+    condition: succeededOrFailed()
+  - task: PowerShell@2
+    inputs:
+    targetType: 'inline'
+    script: |
         Write-Host "Hello World"
         git status
