@@ -16,6 +16,7 @@ PS C:\Users\Wojtek\Documents\WindowsPowerShell\Scripts> Get-DnsName
 
 
 function Get-DnsName {
+    [cmdletbinding()]
     param (
 
     )

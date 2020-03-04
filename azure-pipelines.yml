@@ -5,6 +5,7 @@
 # https://aka.ms/yaml
 
 trigger:
+<<<<<<< HEAD
   - dev
   
 pool:
@@ -31,3 +32,39 @@ steps:
     script: |
         Write-Host "Hello World"
         git status
+=======
+- dev
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+- group: Var
+
+steps:
+  - task: Pester@0
+    inputs:
+      scriptFolder: '.\Build.Tests.ps1'
+      resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+      usePSCore: False
+      run32Bit: False
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '$(System.DefaultWorkingDirectory)\Test-Pester.xml'
+    condition: succeededOrFailed()
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host "Hello World"
+        git fetch
+        git config --global user.email wojciechpietrzak@yahoo.customize
+        git branch
+        git checkout --track -b dev
+        git branch
+        git checkout --track -b master
+        git checkout master
+
+
+>>>>>>> dev
